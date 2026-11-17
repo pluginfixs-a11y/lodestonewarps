@@ -17,11 +17,14 @@ public class PlayerTimerManager {
         ModConfig config = LodestoneWarps.getConfig();
         WarpDataState dataState = WarpDataState.get(server);
 
-        if (server.getTickCount() % (config.cleanup_expired_player_data_minutes * 1200) == 0) {
+        // Ноль в конфиге (человек ставит его, чтобы «выключить») раньше давал деление на ноль
+        // и валил сервер на первом же тике: остаток от деления на 0 — это ArithmeticException.
+        int cleanupTicks = config.cleanup_expired_player_data_minutes * 1200;
+        if (cleanupTicks > 0 && server.getTickCount() % cleanupTicks == 0) {
             dataState.cleanupExpiredData(now);
         }
 
-        if (server.getTickCount() % config.weakness_reapply_ticks != 0) {
+        if (config.weakness_reapply_ticks <= 0 || server.getTickCount() % config.weakness_reapply_ticks != 0) {
             return;
         }
 

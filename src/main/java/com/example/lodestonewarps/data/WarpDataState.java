@@ -166,10 +166,22 @@ public class WarpDataState {
                 dtoList.add(new WarpDto(warp));
             }
 
-            try (FileWriter writer = new FileWriter(activeDataFile)) {
+            // Пишем во временный файл и переставляем его на место одним move: если сервер упадёт
+            // посреди записи, старый файл с варпами останется целым, а не превратится в обрезанный JSON.
+            java.nio.file.Path target = activeDataFile.toPath();
+            java.nio.file.Path tmp = target.resolveSibling(activeDataFile.getName() + ".tmp");
+
+            try (FileWriter writer = new FileWriter(tmp.toFile())) {
                 GSON.toJson(dtoList, writer);
-                System.out.println("[LodestoneWarps] Successfully saved " + dtoList.size() + " warps to JSON file: " + activeDataFile.getAbsolutePath());
             }
+            try {
+                java.nio.file.Files.move(tmp, target,
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                        java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+            } catch (java.nio.file.AtomicMoveNotSupportedException e) {
+                java.nio.file.Files.move(tmp, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
+            System.out.println("[LodestoneWarps] Successfully saved " + dtoList.size() + " warps to JSON file: " + activeDataFile.getAbsolutePath());
         } catch (Throwable t) {
             System.err.println("[LodestoneWarps] Error saving JSON data file:");
             t.printStackTrace();

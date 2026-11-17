@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -26,6 +27,8 @@ public class LodestoneWarps implements ModInitializer {
 
         UseBlockCallback.EVENT.register(new RightClickHandler());
         PlayerBlockBreakEvents.BEFORE.register(new BlockBreakHandler());
+
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> WarmupManager.onPlayerLogout(handler.player));
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             WarmupManager.tick(server);
