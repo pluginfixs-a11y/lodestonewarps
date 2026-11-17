@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "lodestonewarps",
+  "version": "${version}",
+  "name": "Lodestone Warps",
+  "description": "Server-side Lodestone Warps mod",
+  "authors": [
+    "Developer"
+  ],
+  "license": "MIT",
+  "icon": "assets/lodestonewarps/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.lodestonewarps.LodestoneWarps"
+    ]
+  },
+  "mixins": [
+    "lodestonewarps.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "${minecraft_dep}",
+    "java": ">=25"
+  }
+}
