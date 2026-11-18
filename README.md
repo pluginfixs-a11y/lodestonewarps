@@ -6,16 +6,21 @@ connect without installing anything.
 
 ## How it works
 
-1. Sneak-right-click a lodestone with a recovery compass (the compass is consumed).
+1. Sneak-right-click a lodestone with a recovery compass. The compass is used up when the pair is completed
+   (second lodestone), not when the first one is set.
 2. Do the same on a second lodestone — the pair becomes a warp.
 3. Right-click a linked lodestone: after a short warmup (moving cancels it) you are teleported to the pair.
+
+The warmup only starts at **full health**. A player who is missing even half a heart does not warp: the mod
+plays the cancel puff (smoke + extinguish sound) every few seconds instead. There is no text in this mod, so
+that puff is the only feedback — heal up and it works.
 
 Distances are limited (`min_distance` / `max_distance`, same dimension by default). The further the warp, the
 longer the cooldown and the harsher the debuffs: weakness, then slowness, then mining fatigue; blindness comes
 on top. Debuffs are reapplied every few ticks and (by default) cannot be milked away.
 
-If the exit is blocked the mod clears space around it; if the exit is gone entirely the entrance explodes
-(configurable, warning sound first). Exit chunks are preloaded so you do not land in unloaded terrain.
+If the exit is blocked the mod clears space around it; if the exit is gone entirely the entrance smokes for a
+second and then explodes (configurable). Exit chunks are preloaded so you do not land in unloaded terrain.
 
 ## Config
 
