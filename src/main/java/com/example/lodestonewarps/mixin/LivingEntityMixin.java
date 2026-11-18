@@ -1,5 +1,6 @@
 package com.example.lodestonewarps.mixin;
 
+import com.example.lodestonewarps.LodestoneWarps;
 import com.example.lodestonewarps.data.PlayerData;
 import com.example.lodestonewarps.data.WarpDataState;
 import com.example.lodestonewarps.util.ReflectionUtils;
@@ -17,13 +18,18 @@ public abstract class LivingEntityMixin {
     @Inject(method = "removeAllEffects", at = @At("HEAD"))
     private void onRemoveAllEffects(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = (LivingEntity) (Object) this;
-        if (entity instanceof ServerPlayer player) {
-            if (ReflectionUtils.hasMobEffect(entity, MobEffects.BLINDNESS)) {
-                WarpDataState dataState = WarpDataState.get(ReflectionUtils.getLevel(player).getServer());
-                PlayerData pData = dataState.getPlayerData(ReflectionUtils.getPlayerName(player));
-                pData.setBlindnessCancelledByMilk(true);
-                dataState.setDirty();
-            }
+        if (!(entity instanceof ServerPlayer player)) {
+            return;
+        }
+        // Молоко выключается конфигом: тогда слепота ведёт себя как слабость — её никто не снимает.
+        if (!LodestoneWarps.getConfig().blindness_removable_by_milk) {
+            return;
+        }
+        if (ReflectionUtils.hasMobEffect(entity, MobEffects.BLINDNESS)) {
+            WarpDataState dataState = WarpDataState.get(ReflectionUtils.getLevel(player).getServer());
+            PlayerData pData = dataState.getPlayerData(ReflectionUtils.getPlayerName(player));
+            pData.setBlindnessCancelledByMilk(true);
+            dataState.setDirty();
         }
     }
 }

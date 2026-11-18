@@ -1,4 +1,5 @@
-/* src/main/resources/config/lodestonewarps.json */
+// Справочная копия того, что мод пишет в config/lodestonewarps.json при первом старте.
+// Сам файл создаётся из ModConfig, этот лежит в jar только как документация.
 {
   "max_distance": 5000,
   "min_distance": 16,
@@ -7,10 +8,8 @@
   "creation_timeout_seconds": 3600,
   "consume_recovery_compass": true,
   "warmup_seconds": 5,
-  "warmup_movement_check_ticks": 5,
   "warmup_particle_ticks": 5,
-  "warmup_actionbar_ticks": 20,
-  "warmup_position_tolerance": 0.3,
+  "warmup_position_tolerance": 0.55,
   "warmup_y_tolerance": 0.25,
   "warmup_cancel_retry_seconds": 3,
   "cooldown_seconds_per_500": 60,
@@ -28,14 +27,6 @@
   "mining_fatigue_amplifier": 1,
   "blindness_seconds": 5,
   "blindness_removable_by_milk": true,
-  "blindness_persist_after_death": true,
-  "blindness_persist_after_logout": true,
-  "hp_penalty_mode": "FULL_LEAVES_ONE_OTHERWISE_KILL",
-  "ignore_armor": true,
-  "ignore_protection": true,
-  "ignore_resistance": true,
-  "check_absorption": false,
-  "strip_absorption": false,
   "allow_totem_save": true,
   "apply_hp_penalty_after_teleport": false,
   "allow_creative": true,
@@ -67,8 +58,6 @@
     "minecraft:moving_piston"
   ],
   "exit_clear_blacklist_unbreakable": true,
-  "blocked_exit_cancels_teleport": true,
-  "blocked_exit_causes_explosion": false,
   "exit_chunk_preload": true,
   "exit_chunk_ticket_seconds": 15,
   "max_active_chunk_tickets": 32,
@@ -76,17 +65,10 @@
   "explosion_power": 2.0,
   "explosion_fire": false,
   "explosion_block_damage": true,
-  "explosion_entity_damage": true,
-  "explosion_warning_seconds": 1.0,
   "explosion_removes_entrance": true,
   "entrance_drop_on_break": false,
-  "entrance_drop_on_explosion": false,
-  "explosion_preserve_drops": true,
   "max_active_explosion_animations": 16,
-  "cancel_animation_on_failed_teleport": true,
   "cancel_animation_on_warmup_interrupt": true,
   "cancel_animation_sound": "minecraft:block.fire.extinguish",
-  "player_storage_key": "CASE_SENSITIVE_NAME",
-  "cleanup_expired_player_data_minutes": 5,
-  "debug_logging": false
+  "cleanup_expired_player_data_minutes": 5
 }

@@ -33,9 +33,14 @@ If the exit is blocked the mod clears space around it; if the exit is gone entir
 | `weakness_amplifier` / `slowness_amplifier` / `mining_fatigue_amplifier` | `1` | debuff levels |
 | `slowness_from_distance` / `mining_fatigue_from_distance` | `500` / `1500` | when the extra debuffs start |
 | `blindness_seconds` | `5` | blindness after the jump |
-| `hp_penalty_mode` | `FULL_LEAVES_ONE_OTHERWISE_KILL` | HP penalty |
+| `blindness_removable_by_milk` | `true` | `false` — blindness is reapplied like weakness, milk does not help |
+| `weakness_protected_from_milk` | `true` | `true` — weakness/slowness/fatigue are reapplied after milk |
+| `apply_hp_penalty_after_teleport` | `false` | HP penalty on arrival (off: the debuffs are the penalty) |
 | `exit_clear_*` | — | clearing space at the destination |
 | `missing_exit_explosion` / `explosion_power` | `true` / `2.0` | what happens when the exit is destroyed |
+
+Penalties are per session: they are not written to disk, so logging out clears the cooldown and the
+debuffs — there is no `blindness_persist_after_logout`-style option because nothing implements it.
 
 ## Install
 

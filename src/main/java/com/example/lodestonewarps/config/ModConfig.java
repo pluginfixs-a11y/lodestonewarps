@@ -19,9 +19,8 @@ public class ModConfig {
     public boolean consume_recovery_compass = true;
 
     public int warmup_seconds = 5;
-    public int warmup_movement_check_ticks = 5;
+    /** Раз в сколько тиков сыпать частицы у входа во время прогрева; 0 — не сыпать вовсе. */
     public int warmup_particle_ticks = 5;
-    public int warmup_actionbar_ticks = 20;
     public double warmup_position_tolerance = 0.55;
     public double warmup_y_tolerance = 0.25;
     public int warmup_cancel_retry_seconds = 3;
@@ -62,16 +61,9 @@ public class ModConfig {
     }
 
     public int blindness_seconds = 5;
+    /** Молоко снимает слепоту. false — слепота держится свой срок, как слабость. */
     public boolean blindness_removable_by_milk = true;
-    public boolean blindness_persist_after_death = true;
-    public boolean blindness_persist_after_logout = true;
 
-    public String hp_penalty_mode = "FULL_LEAVES_ONE_OTHERWISE_KILL";
-    public boolean ignore_armor = true;
-    public boolean ignore_protection = true;
-    public boolean ignore_resistance = true;
-    public boolean check_absorption = false;
-    public boolean strip_absorption = false;
     public boolean allow_totem_save = true;
     public boolean apply_hp_penalty_after_teleport = false;
 
@@ -105,8 +97,6 @@ public class ModConfig {
             "minecraft:moving_piston"
     ));
     public boolean exit_clear_blacklist_unbreakable = true;
-    public boolean blocked_exit_cancels_teleport = true;
-    public boolean blocked_exit_causes_explosion = false;
 
     public boolean exit_chunk_preload = true;
     public int exit_chunk_ticket_seconds = 15;
@@ -116,21 +106,14 @@ public class ModConfig {
     public float explosion_power = 2.0f;
     public boolean explosion_fire = false;
     public boolean explosion_block_damage = true;
-    public boolean explosion_entity_damage = true;
-    public double explosion_warning_seconds = 1.0;
     public boolean explosion_removes_entrance = true;
     public boolean entrance_drop_on_break = false;
-    public boolean entrance_drop_on_explosion = false;
-    public boolean explosion_preserve_drops = true;
     public int max_active_explosion_animations = 16;
 
-    public boolean cancel_animation_on_failed_teleport = true;
     public boolean cancel_animation_on_warmup_interrupt = true;
     public String cancel_animation_sound = "minecraft:block.fire.extinguish";
 
-    public String player_storage_key = "CASE_SENSITIVE_NAME";
     public int cleanup_expired_player_data_minutes = 5;
-    public boolean debug_logging = false;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 

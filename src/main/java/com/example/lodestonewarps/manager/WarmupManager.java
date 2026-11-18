@@ -262,7 +262,8 @@ public class WarmupManager {
                 long secondsElapsed = (now - session.startTime) / 1000;
                 long totalWarmup = config.warmup_seconds;
 
-                if (server.getTickCount() % config.warmup_particle_ticks == 0) {
+                // 0 в конфиге — «частиц не надо»: остаток от деления на 0 валит сервер.
+                if (config.warmup_particle_ticks > 0 && server.getTickCount() % config.warmup_particle_ticks == 0) {
                     ReflectionUtils.sendParticles(
                             level,
                             ParticleTypes.PORTAL,
